@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const jobMod = require("../jobPosts/job_posts_model.js");
+const jobMod = require("../jobs/jobs-model.js");
 const tagsRouter = require("../tags/tags_router");
 const tasksRouter = require("../tasks/tasks_router");
 
