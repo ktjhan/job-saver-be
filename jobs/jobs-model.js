@@ -1,17 +1,17 @@
 const db = require("../database/db-config");
 
 function findJob() {
-  return db("jobPosts").select();
+  return db("jobs").select();
 }
 
 async function addJob(newJob, id) {
-  return db("jobPosts")
+  return db("jobs")
     .where({ id })
     .insert(newJob);
 }
 
 async function findJobById(id) {
-  const job = await db("jobPosts")
+  const job = await db("jobs")
     .select()
     .where({ id })
     .first();
@@ -20,26 +20,26 @@ async function findJobById(id) {
 }
 
 function findJobByUser(users_id) {
-  return db("jobPosts")
+  return db("jobs")
     .select()
     .where({ users_id });
 }
 
 function removeJob(id) {
-  return db("jobPosts")
+  return db("jobs")
     .where({ id })
     .del();
 }
 
 async function updateJob(id, job_update) {
-  await db("jobPosts")
+  await db("jobs")
     .where({ id })
     .update(job_update);
   return findJobById(id);
 }
 
 function findColumn() {
-  return db("jobPosts").select("column_id");
+  return db("jobs").select("column_id");
 }
 
 module.exports = {

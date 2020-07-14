@@ -1,17 +1,17 @@
 const db = require("../database/db-config");
 
 function findTags() {
-  return db("jobTags").select();
+  return db("tags").select();
 }
 
 function findTagsByUser(userId) {
-  return db("jobTags")
+  return db("tags")
     .select()
     .where({ userId });
 }
 
 async function findTagById(id) {
-  const tag = await db("jobTags")
+  const tag = await db("tags")
     .select()
     .where({ id })
     .first();
@@ -21,18 +21,18 @@ async function findTagById(id) {
 
 async function addTag(newTag, id) {
 const {tagName} = newTag
-  return db("jobTags")
+  return db("tags")
     .insert({tagName,jobPosts_id:id});
 }
 
 function removeTag(id) {
-  return db("jobTags")
+  return db("tags")
     .where({ id })
     .del();
 }
 
 async function updateTag(id, tag_update) {
-  await db("jobTags")
+  await db("tags")
     .where({ id })
     .update(tag_update)
   return findTagById(id);

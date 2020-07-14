@@ -1,4 +1,5 @@
-exports.up = async function(knex) {
+
+   exports.up = async function(knex) {
     await knex.schema.createTable("tasks", (table) => {
       table.increments("id");
       table.string("taskName", 128).notNull();
@@ -6,7 +7,7 @@ exports.up = async function(knex) {
       table
         .integer("job_id")
         .references("id")
-        .inTable("jobPosts")
+        .inTable("jobs")
         .onDelete("CASCADE")
         .onUpdate("CASCADE")
         .notNull()
