@@ -9,21 +9,19 @@ module.exports = {
     }
   },
 
-  // production: {
-  //   client: 'sqlite3',
-  //   connection: {
+  production: {
+    client: 'sqlite3',
+    connection: {
       
-  //     database: 'my_db',
-  //     user:     'username',
-  //     password: 'password'
-  //   },
-  //   pool: {
-  //     min: 2,
-  //     max: 10
-  //   },
-  //   migrations: {
-  //     tableName: 'knex_migrations'
-  //   }
-  // }
+      database: 'job-saver'
+    },
+    pool: {
+      min: 2,
+      max: 10
+    },
+    migrations: {
+      tableName: 'knex_migrations'
+    }
+  }
 
 };
