@@ -12,7 +12,7 @@ server.use(helmet());
 server.use(express.json());
 server.use("/users", authenticationRequired, checkUser, jobsRouter)
 
-//Connection test 
+// Connection test 
 server.get("/", (req, res, next) => {
     res.json({ message:"test test"});
 });
