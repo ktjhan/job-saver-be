@@ -3,7 +3,7 @@ const OktaJwtVerifier = require("@okta/jwt-verifier");
 
 
 const oktaJwtVerifier = new OktaJwtVerifier({
-  issuer: "https://dev-452202.okta.com",
+  issuer: process.env.OKTA_ORG,
   clientId: process.env.OKTA_CLIENT_ID,
   assertClaims: {
     aud: "api://default"
@@ -11,6 +11,7 @@ const oktaJwtVerifier = new OktaJwtVerifier({
 });
 
 function authenticationRequired(req, res, next) {
+  // console.log('hit')
   if(process.env.NODE_ENV === 'production') {
     return next();
   }
