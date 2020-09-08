@@ -1,17 +1,16 @@
-
 exports.up = async function(knex) {
-    await knex.schema.createTable("tags", table => {
+    await knex.schema.createTable("jobTags", table => {
       table.increments("id");
       table.string("tagName").notNull();
       table
         .integer("jobPosts_id")
         .references("id")
-        .inTable("jobs")
+        .inTable("jobPosts")
         .onDelete("CASCADE")
         .onUpdate("CASCADE");
     });
   };
   
   exports.down = async function(knex) {
-    await knex.schema.dropTableIfExists("tags");
+    await knex.schema.dropTableIfExists("jobTags");
   };

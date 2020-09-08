@@ -1,27 +1,38 @@
 // Update with your config settings.
 
-module.exports = {
-
-  development: {
-    client: 'sqlite3',
-    connection: {
-      filename: './database/job-saver.db'
-    }
-  },
-
-  production: {
-    client: 'sqlite3',
-    connection: {
-      
-      database: 'job-saver'
-    },
+require('dotenv').config();
+const sqlite3 = {
+    client: "sqlite3",
+    useNullAsDefault: true,
     pool: {
-      min: 2,
-      max: 10
-    },
-    migrations: {
-      tableName: 'knex_migrations'
+        afterCreate: (conn, done) => {
+            conn.run("PRAGMA foreign_keys = ON", done);
+        }
     }
-  }
+};
+const commonDB = {
+    migrations: {
+        tableName: "knex_migrations",
+        directory: "./database/migrations"
+    },
+    seeds: {
+        directory: "./database/seeds"
+    },
+};
+const localDB = {
+    ...sqlite3,
+    ...commonDB,
+    connection: {
+        filename: `${__dirname}/database/${process.env.NODE_ENV === 'test' ? 'test' : 'job-saver'}.db`
+    }
+};
 
+
+module.exports = {
+    development: {
+        ...localDB
+    },
+    test: {
+        ...localDB,
+    }
 };
