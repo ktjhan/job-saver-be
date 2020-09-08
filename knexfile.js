@@ -33,6 +33,9 @@ module.exports = {
         ...localDB
     },
     test: {
-        ...localDB,
+        ...localDB
+    },
+    production: {
+      ...localDB
     }
 };
