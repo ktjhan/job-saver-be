@@ -20,6 +20,7 @@ function authenticationRequired(req, res, next) {
   let match = authHeader.match(/Bearer (.+)/);
   let matcharr = match.split()
   match = matcharr.slice(6, matcharr.length)
+  console.log(match)
   if (!match) {
     console.log("error at oktaJwtVerifier L 23")
     return res
