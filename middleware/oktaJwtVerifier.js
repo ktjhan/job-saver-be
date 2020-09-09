@@ -17,9 +17,11 @@ function authenticationRequired(req, res, next) {
   }
   
   const authHeader = req.headers.authorization || "";
-  const match = authHeader.match(/Bearer (.+)/);
-
+  let match = authHeader.match(/Bearer (.+)/);
+  let matcharr = match.split()
+  match = matcharr.slice(6, matcharr.length)
   if (!match) {
+    console.log("error at oktaJwtVerifier L 23")
     return res
       .status(401)
       .json({ message: "Please try logging in first, then try again!" });
