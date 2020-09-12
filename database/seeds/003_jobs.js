@@ -1,4 +1,3 @@
-
 exports.seed = async knex => {
   await knex("jobs").insert([
     { jobTitle: "Senior Dev", logo: "", companyTitle: "Google", companyUrl: "amazon.com", users_id: 1, column_id: "Accepted", index: 1, urlText: "https://faridhamida.com", applicationDeadline: 7/7/20, rating: 5, description: "Software Engineer", location: "Los Angeles", notes: "Great" },

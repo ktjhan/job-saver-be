@@ -1,4 +1,3 @@
-  
 exports.seed = async knex => {
   await knex("jobTags").insert([
     { tagName: "Full Time", jobPosts_id: 1 },
