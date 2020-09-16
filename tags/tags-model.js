@@ -39,9 +39,9 @@ async function updateTag(id, tag_update) {
 }
 
 module.exports = {
-  // findTags,
-  // findTagsByUser,
-  // findTagById,
+  findTags,
+  findTagsByUser,
+  findTagById,
   addTag,
   removeTag,
   updateTag
