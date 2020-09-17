@@ -1,15 +1,14 @@
-// Update with your config settings.
-
 require('dotenv').config();
 const sqlite3 = {
     client: "sqlite3",
     useNullAsDefault: true,
-    pool: {
-        afterCreate: (conn, done) => {
-            conn.run("PRAGMA foreign_keys = ON", done);
-        }
-    }
+    // pool: {
+    //     afterCreate: (conn, done) => {
+    //         conn.run("PRAGMA foreign_keys = ON", done);
+    //     }./.
+    // }
 };
+
 const commonDB = {
     migrations: {
         tableName: "knex_migrations",
@@ -19,6 +18,7 @@ const commonDB = {
         directory: "./database/seeds"
     },
 };
+
 const localDB = {
     ...sqlite3,
     ...commonDB,
@@ -27,15 +27,27 @@ const localDB = {
     }
 };
 
+const deployedDB = {
+    client: 'pg',
+    ...commonDB,
+    connection: process.env.DATABASE_URL,
+    pool: {
+        min: 2,
+        max: 10
+    }
+};
 
 module.exports = {
     development: {
         ...localDB
     },
     test: {
+        ...localDB,
+    },
+    staging: {
         ...localDB
     },
     production: {
-      ...localDB
+        ...deployedDB
     }
 };
