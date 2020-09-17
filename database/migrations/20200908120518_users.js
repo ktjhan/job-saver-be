@@ -19,10 +19,10 @@ exports.up = async function(knex) {
       table.string("companyUrl");
       table
         .integer("users_id")
-        // .references("id")
-        // .inTable("users")
-        // .onDelete("CASCADE")
-        // .onUpdate("CASCADE");
+        .references("id")
+        .inTable("users")
+        .onDelete("CASCADE")
+        .onUpdate("CASCADE");
       table.string("column_id")
       table.integer("index")
     });
