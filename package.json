@@ -1,11 +1,14 @@
 {
   "name": "job-saver-be",
   "version": "1.0.0",
+  "engines": {
+    "node": "12.16.1"
+    },
   "description": "A job saving app",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "server": "nodemon index.js"
+    "server": "nodemon -r dotenv/config index.js"
   },
   "repository": {
     "type": "git",
