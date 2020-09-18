@@ -2,10 +2,10 @@ const userMod = require("../users/users-model");
 
 async function checkUser(req, res, next) {
 
-  if (process.env.NODE_ENV === 'production') {
-    req.userId = 1;
-    return next();
-  }
+  // if (process.env.NODE_ENV === 'production') {
+  //   req.userId = 1;
+  //   return next();
+  // }
 
   try {
     console.log(req.jwt)
