@@ -9,7 +9,7 @@ function findBy(filter) {
 }
 
 async function add(user) {
-    return db("users").insert(user);
+    return db("users").insert(user); //Todo
 }
 
 async function findByEmail(email){

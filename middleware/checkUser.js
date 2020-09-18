@@ -8,12 +8,12 @@ async function checkUser(req, res, next) {
   // }
 
   try {
-    console.log(req.jwt)
-    const firstName = req.jwt.claims.firstName;
-    const lastName = req.jwt.claims.lastName;
-    const email = req.jwt.claims.email;
+    console.log("jwt",req.jwt.claims);
+    const firstName = req.jwt.claims.uid; //TODO
+    const lastName = req.jwt.claims.cid; //TODO
+    const email = req.jwt.claims.sub;
     const user = await userMod.findByEmail(email);
-
+  console.log("user",user);
     if (user) {
       req.userId = user.id;
       
@@ -24,15 +24,20 @@ async function checkUser(req, res, next) {
         lastName,
         email
       };
-      const [id] = await userMod.add(appUser);
+
+      const id = await userMod.add(appUser);
+
+      console.log('res', res);
       if (id) {
-        req.userId = id;
+        req.userId = 1; //TODO
         next();
       } else {
+        console.log("reached here");
         res.status(500).json({ message: "Failed saving user to database" });
       }
     }
   } catch (err) {
+    console.log("error",err);
     res.status(500).json(err);
   }
 }

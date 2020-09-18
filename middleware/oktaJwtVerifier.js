@@ -17,15 +17,18 @@ function authenticationRequired(req, res, next) {
   // }
   
   const authHeader = req.headers.authorization || "";
-  let match = authHeader.match(/Bearer (.+)/);
-  if (!match) {
+  getToken = authHeader.split(" ")[1];
+
+console.log('getToken', getToken);
+
+  if (!getToken) {
     console.log("error at oktaJwtVerifier L 23")
     return res
       .status(401)
       .json({ message: "Please try logging in first, then try again!" });
   }
 
-  const accessToken = match[1];
+  const accessToken = getToken;
   const expectedAudience = "api://default";
 
   return oktaJwtVerifier
