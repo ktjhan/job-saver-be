@@ -4,9 +4,7 @@ const router = express.Router({
 });
 const tagMod = require("./tags-model");
 
-router.get(
-  "/", 
-  async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
     const tags = await tagMod.findTags();
     res.status(200).json(tags);
@@ -21,21 +19,19 @@ router.post("/addTag/:id", async (req, res, next) => {
     const newTag = await tagMod.addTag(req.body, id);
     if (newTag) {
       res.status(201).json({
-        message: "New tag created"
+        message: "New tag created",
       });
     } else {
       send.status(500).json({
-        message: "Error saving new tag, please try again later"
+        message: "Error saving new tag, please try again later",
       });
     }
   } catch (err) {
-    next(err)
+    next(err);
   }
 });
 
-router.delete(
-  "/removeTag/:id", 
-  async (req, res, next) => {
+router.delete("/removeTag/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
     const deletedTag = await tagMod.removeTag(id);
@@ -54,19 +50,17 @@ router.delete(
   }
 });
 
-router.put(
-  "/updateTag/:id", 
-  async (req, res, next) => {
+router.put("/updateTag/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
     const updatedTag = await tagMod.updateTag(id, req.body);
     if (updatedTag) {
       res.status(200).json({
-        message: "Tag updated"
+        message: "Tag updated",
       });
     } else {
       send.status(500).json({
-        message: "Error updating tag, please try again later"
+        message: "Error updating tag, please try again later",
       });
     }
   } catch (err) {

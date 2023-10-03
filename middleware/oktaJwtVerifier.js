@@ -1,24 +1,22 @@
-require("dotenv").config()
+require("dotenv").config();
 const OktaJwtVerifier = require("@okta/jwt-verifier");
 
-
 const oktaJwtVerifier = new OktaJwtVerifier({
-  issuer: process.env.OKTA_ORG,
+  issuer: `https://${process.env.OKTA_ORG}/oauth2/default`,
   clientId: process.env.OKTA_CLIENT_ID,
   assertClaims: {
-    aud: "api://default"
-  }
+    aud: "api://default",
+  },
 });
 
 function authenticationRequired(req, res, next) {
-  
   const authHeader = req.headers.authorization || "";
   getToken = authHeader.split(" ")[1];
 
-console.log('getToken', getToken);
+  console.log("getToken", getToken);
 
   if (!getToken) {
-    console.log("error at oktaJwtVerifier L 23")
+    console.log("error at oktaJwtVerifier L 23");
     return res
       .status(401)
       .json({ message: "Please try logging in first, then try again!" });
@@ -29,12 +27,11 @@ console.log('getToken', getToken);
 
   return oktaJwtVerifier
     .verifyAccessToken(accessToken, expectedAudience)
-    .then(jwt => {
-    
+    .then((jwt) => {
       req.jwt = jwt;
       next();
     })
-    .catch(err => {
+    .catch((err) => {
       res.status(401).json(err.message);
       console.log(err);
     });
