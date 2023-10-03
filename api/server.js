@@ -13,7 +13,7 @@ server.use(express.json());
 server.use("/users", authenticationRequired, checkUser, jobsRouter)
 
 // Connection test 
-server.get("/", (req, res, next) => {
+server.get("/", (req, res) => {
     res.json({ message:"test test"});
 });
 
